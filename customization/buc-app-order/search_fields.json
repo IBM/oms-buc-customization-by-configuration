@@ -1,0 +1,264 @@
+{
+  "orders": {
+    "fields": [
+      {
+        "label": "CUSTOM_ORDER.SEARCH.IS_PRE_ORDER",
+        "type": "dropdown",
+        "target": "orders",
+        "list": [
+          {
+            "id": "Y",
+            "label": "CUSTOM_LIST.BOOLEAN.Y"
+          },
+          {
+            "id": "N",
+            "label": "CUSTOM_LIST.BOOLEAN.N"
+          }
+        ],
+        "request": "OrderLine.CustomAttributes.BUC_IsPreOrder",
+        "showWhen": "always"
+      },
+      {
+        "label": "CUSTOM_ORDER.SEARCH.IS_VIP_ORDER",
+        "type": "dropdown",
+        "target": "orders",
+        "request": "OrderLine.CustomAttributes.BUC_IsVIPOrder",
+        "showWhen": "always",
+        "list": [
+          {
+            "id": "Y",
+            "label": "CUSTOM_LIST.BOOLEAN.Y"
+          },
+          {
+            "id": "N",
+            "label": "CUSTOM_LIST.BOOLEAN.N"
+          }
+        ]
+      },
+      {
+        "label": "CUSTOM_ORDER.SEARCH.CUSTOMER_ZIP_CODE",
+        "type": "text",
+        "request": "CustomerZipCode",
+        "target": "orders",
+        "showWhen": "always"
+      },
+      {
+        "label": "CUSTOM_ORDER.SEARCH.DRAFT_ORDER",
+        "type": "toggle",
+        "target": "orders",
+        "showWhen": "always",
+        "request": "DraftOrderFlag",
+        "list": [
+          {
+            "id": "true",
+            "label": "CUSTOM_LIST.BOOLEAN.Y"
+          },
+          {
+            "id": "false",
+            "label": "CUSTOM_LIST.BOOLEAN.N",
+            "selected": "true"
+          }
+        ]
+      },
+      {
+        "showWhen": "always",
+        "label": "CUSTOM_ORDER.SEARCH.PAYMENT_TYPE",
+        "type": "dropdown",
+        "target": "orders",
+        "request": "PaymentMethod.PaymentType",
+        "fetch": {
+          "api": "getPaymentTypeList",
+          "type": "oms",
+          "parameters": {
+            "CallingOrganizationCode": "{{enterprise}}"
+          },
+          "response": {
+            "listAttribute": "PaymentType",
+            "map": {
+              "id": "PaymentType",
+              "label": "PaymentTypeDescription"
+            }
+          }
+        }
+      },
+      {
+        "label": "CUSTOM_ORDER.SEARCH.PAYMENT_BILL_TO",
+        "type": "addressPicker",
+        "target": "orders",
+        "showWhen": "Address",
+        "request": "PaymentMethod.BillToKey",
+        "value": {
+          "content": "",
+          "address": ""
+        }
+      },
+      {
+        "label": "CUSTOM_ORDER.SEARCH.IMPORT_LICENSE_EXPIRE_DATE",
+        "type": "date",
+        "target": "orders",
+        "showWhen": "always",
+        "request": "OrderLine.ImportLicenseExpDate"
+      },
+      {
+        "label": "CUSTOM_ORDER.SEARCH.KIT_CODE",
+        "type": "radio",
+        "list": [
+          {
+            "id": "LK",
+            "label": "CUSTOM_LIST.KIT_CODE.LOGICAL_KIT"
+          },
+          {
+            "id": "BUNDLE",
+            "label": "CUSTOM_LIST.KIT_CODE.BUNDLE"
+          },
+          {
+            "id": "",
+            "label": "CUSTOM_LIST.KIT_CODE.NONE",
+            "selected": "true"
+          }
+        ],
+        "target": "orders",
+        "showWhen": "outbound-order.Item",
+        "orientation": "vertical",
+        "request": "OrderLine.KitCode"
+      },
+      {
+        "label": "CUSTOM_ORDER.SEARCH.PRIME_LINE_NUMBER",
+        "type": "number",
+        "request": "PrimeLineNo",
+        "target": "all",
+        "showWhen": "order-line"
+      },
+      {
+        "showWhen": "Item",
+        "label": "CUSTOM_ORDER.SEARCH.SERIAL_NO",
+        "type": "dropdownQuery",
+        "target": "orders",
+        "request": "OrderLine.SerialNo",
+        "operator": "LIKE",
+        "fetch": {
+          "api": "getQueryTypeList",
+          "type": "oms",
+          "parameters": {},
+          "translation": {
+            "prefix": "ORDER_SEARCH.GENERAL.LABEL_QUERY_",
+            "key": "label"
+          },
+          "response": {
+            "listAttribute": "StringQueryTypes.QueryType",
+            "map": {
+              "id": "QueryType",
+              "label": "QueryTypeDesc"
+            }
+          }
+        }
+      },
+      {
+        "showWhen": "inbound-order.Item",
+        "label": "CUSTOM_ORDER.SEARCH.BATCH_NO",
+        "type": "dropdownQuery",
+        "target": "orders",
+        "request": "OrderLine.OrderLineInvAttRequest.BatchNo",
+        "operator": "LIKE",
+        "fetch": {
+          "api": "getQueryTypeList",
+          "type": "oms",
+          "parameters": {},
+          "translation": {
+            "prefix": "ORDER_SEARCH.GENERAL.LABEL_QUERY_",
+            "key": "label"
+          },
+          "response": {
+            "listAttribute": "StringQueryTypes.QueryType",
+            "map": {
+              "id": "QueryType",
+              "label": "QueryTypeDesc"
+            }
+          }
+        }
+      },
+      {
+        "showWhen": "inbound-order.Item",
+        "label": "CUSTOM_ORDER.SEARCH.LOT_ATTRIBUTE_1",
+        "type": "dropdownQuery",
+        "target": "orders",
+        "request": "OrderLine.OrderLineInvAttRequest.LotAttribute1",
+        "operator": "LIKE",
+        "fetch": {
+          "api": "getQueryTypeList",
+          "type": "oms",
+          "parameters": {},
+          "translation": {
+            "prefix": "ORDER_SEARCH.GENERAL.LABEL_QUERY_",
+            "key": "label"
+          },
+          "response": {
+            "listAttribute": "StringQueryTypes.QueryType",
+            "map": {
+              "id": "QueryType",
+              "label": "QueryTypeDesc"
+            }
+          }
+        }
+      },
+      {
+        "label": "CUSTOM_ORDER.SEARCH.MERGE_NODE",
+        "type": "nodePicker",
+        "target": "orders",
+        "showWhen": "outbound-order",
+        "request": "OrderLine.MergeNode",
+        "value": {
+          "selectedNode": [],
+          "enterprise": ""
+        }
+      }
+    ]
+  },
+  "shipments": {
+    "fields": [
+      {
+        "label": "CUSTOM_SHIPMENT.SEARCH.FREIGHT_TERMS",
+        "showWhen": "always",
+        "type": "dropdown",
+        "target": "shipments",
+        "request": "FreightTerms",
+        "fetch": {
+          "api": "getFreightTermsList",
+          "type": "oms",
+          "parameters": {
+            "CallingOrganizationCode": "{{enterprise}}"
+          },
+          "response": {
+            "listAttribute": "FreightTerms",
+            "map": {
+              "id": "FreightTerms",
+              "label": "Description"
+            }
+          }
+        }
+      },
+      {
+        "label": "CUSTOM_SHIPMENT.SEARCH.SHIP_VIA",
+        "showWhen": "^shipment.Carrier",
+        "insertAfter": "carrierService",
+        "type": "dropdown",
+        "list": [
+          {
+            "id": "ROAD",
+            "label": "CUSTOM_LIST.SHIP_VIA.ROAD"
+          },
+          {
+            "id": "AIR",
+            "label": "CUSTOM_LIST.SHIP_VIA.AIR"
+          },
+          {
+            "id": "SEA",
+            "label": "CUSTOM_LIST.SHIP_VIA.SEA"
+          }
+        ],
+        "target": "shipments",
+        "request": "ShipVia"
+      }
+    ]
+  }
+}
