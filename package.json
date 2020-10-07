@@ -1,0 +1,14 @@
+{
+  "name": "buc-customization-by-configuration",
+  "version": "1.0.0",
+  "description": "Search form (and other container) field customization",
+  "scripts": {
+    "upload": "node upload.js"
+  },
+  "dependencies": {
+    "archiver": "^5.0.2",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "private": true
+}
