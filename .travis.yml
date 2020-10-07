@@ -1,0 +1,23 @@
+group: bluezone
+language: node_js
+dist: trusty
+sudo: required
+node_js:
+  - "12"
+services:
+  - xvfb
+cache:
+  yarn: true
+  directories:
+    - node_modules
+before_install:
+  - export BUC_CLIENT_ID;
+  - export BUC_CLIENT_SECRET;
+script:
+  - if [[ -n "$BUC_CLIENT_ID" && -n "$BUC_CLIENT_SECRET" ]]; then
+      yarn upload all
+    fi
+after_success:
+  - if [[ ( "$TRAVIS_BRANCH" == "develop" || "$TRAVIS_BRANCH" == "master" || "$TRAVIS_BRANCH" == "release" || "$TRAVIS_BRANCH" == "production" ) && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+      echo "all done"
+    fi
