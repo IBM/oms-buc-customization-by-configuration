@@ -1,0 +1,41 @@
+{
+  "CUSTOM_ORDER": {
+    "SEARCH": {
+      "IS_PRE_ORDER": "Is Pre order?",
+      "IS_VIP_ORDER": "Is VIP order?",
+      "CUSTOMER_ZIP_CODE": "Customer zip code",
+      "DRAFT_ORDER": "Draft order",
+      "PAYMENT_TYPE": "Payment type",
+      "PAYMENT_BILL_TO": "Payment bill to",
+      "IMPORT_LICENSE_EXPIRE_DATE": "Import license expire date",
+      "KIT_CODE": "Kit code",
+      "PRIME_LINE_NUMBER": "Prime line number",
+      "SERIAL_NO": "Serial No",
+      "BATCH_NO": "Batch No",
+      "LOT_ATTRIBUTE_1": "Lot Attribute 1",
+      "MERGE_NODE": "Merge node"
+    }
+  },
+  "CUSTOM_SHIPMENT": {
+    "SEARCH": {
+      "FREIGHT_TERMS": "Freight terms",
+      "SHIP_VIA": "Ship via"
+    }
+  },
+  "CUSTOM_LIST": {
+    "BOOLEAN": {
+      "Y": "Y",
+      "N": "N"
+    },
+    "KIT_CODE": {
+      "LOGICAL_KIT": "Logical kit",
+      "BUNDLE": "Bundle",
+      "NONE": "None"
+    },
+    "SHIP_VIA": {
+      "ROAD": "Road",
+      "AIR": "Air",
+      "SEA": "Sea"
+    }
+  }
+}
