@@ -16,8 +16,8 @@ before_install:
 script:
   - if [[ -n "$BUC_CLIENT_ID" && -n "$BUC_CLIENT_SECRET" ]]; then
       yarn upload all
-    fi
+    fi;
 after_success:
   - if [[ ( "$TRAVIS_BRANCH" == "develop" || "$TRAVIS_BRANCH" == "master" || "$TRAVIS_BRANCH" == "release" || "$TRAVIS_BRANCH" == "production" ) && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
       echo "all done"
-    fi
+    fi;
