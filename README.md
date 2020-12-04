@@ -1,5 +1,5 @@
 ## Overview
-* By default, the Order search and Shipment search pages in Business User Controls include a comprehensive set of search fields. However, you can customize the pages to add extra search fields that are supported by the IBM Sterling Order Management API.
+* By default, the Order search and Shipment search pages in Order Console include a comprehensive set of search fields. However, you can customize the pages to add extra search fields that are supported by the IBM Sterling Order Management API.
 * This repository provides:
   * Sample code that you can use as a reference to customize the search pages
   * A script to upload the content to your tenant
@@ -9,11 +9,11 @@
 * `yarn install` to install dependencies
 * Add or update environment variables with tenant information. For information about how to retrieve the client ID and secret, see [Assigning a tenant type](https://www.ibm.com/support/knowledgecenter/SSGTJF/developing/custom_tenanttype.html).
   * `BUC_CLIENT_ID`:
-    * The Customization client id from the BUC user interface
+    * The Customization client id from the Order Console user interface
     * if not specified, this will be prompted for
     * e.g., on unix-type systems: `export BUC_CLIENT_ID=<value>`
   * `BUC_CLIENT_SECRET`:
-    * The Customization auth key from the BUC user interface
+    * The Customization auth key from the Order Console user interface
     * if not specified, this will be prompted for
     * e.g., on unix-type systems: `export BUC_CLIENT_SECRET=<value>`
 
