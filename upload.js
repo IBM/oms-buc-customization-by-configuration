@@ -3,15 +3,20 @@ const readline = require('readline');
 const fs = require('fs');
 const archiver = require('archiver');
 
+const BUC_TABLE_CONFIG = 'buc-table-config';
+const GET_PAGE_TEMPLATES = 'getPage-templates';
+const BUC_FIELD_DETAILS = 'buc-field-details';
 const VALID_CTX = {
   search_fields: 'search_fields',
-  table_config: 'table_config',
   translation: 'translation',
-  all: 'all'
+  all: 'all',
+  [ BUC_TABLE_CONFIG ]: BUC_TABLE_CONFIG,
+  [ GET_PAGE_TEMPLATES ]: GET_PAGE_TEMPLATES,
+  [ BUC_FIELD_DETAILS ]: BUC_FIELD_DETAILS
 };
 const USAGE = '\n' +
   'usage: yarn upload all [<app-list>]\n' +
-  // '  asset-type: search_fields | table_config | translation | all\n' +
+  // '  asset-type: search_fields | buc-table-config | getPage-templates | translation | all\n' +
   '  app-list: <app1> [ <app2> [ ... ] ], e.g., buc-app-order; uploads for all apps if omitted';
 const ROOT = './customization';
 const DIST = './dist';
@@ -111,11 +116,19 @@ function collectSearchFields(app, z) {
 }
 
 function collectTableConfig(app, z) {
-  collectFile(`${app}/${VALID_CTX.table_config}.json`, z);
+  collectFile(`${app}/${VALID_CTX[BUC_TABLE_CONFIG]}.json`, z);
+}
+
+function collectPageTemplates(app, z) {
+  collectFile(`${app}/${VALID_CTX[GET_PAGE_TEMPLATES]}.json`, z);
 }
 
 function collectTranslations(app, z) {
   collectFolder(`${app}/assets/${app}/i18n`, z, /\.json$/);
+}
+
+function collectSummarySections(app, z) {
+  collectFile(`${app}/${VALID_CTX[BUC_FIELD_DETAILS]}.json`, z);
 }
 
 function zip(ctx, appList) {
@@ -132,11 +145,17 @@ function zip(ctx, appList) {
       if (ctx === VALID_CTX.all) {
         collectSearchFields(app, z);
         collectTableConfig(app, z);
+        collectPageTemplates(app, z);
         collectTranslations(app, z);
+        collectSummarySections(app, z);
       } else if (ctx === VALID_CTX.search_fields) {
         collectSearchFields(app, z);
-      } else if (ctx === VALID_CTX.table_config) {
+      } else if (ctx === VALID_CTX[BUC_TABLE_CONFIG]) {
         collectTableConfig(app, z);
+      } else if (ctx === VALID_CTX[GET_PAGE_TEMPLATES]) {
+        collectPageTemplates(app, z);
+      } else if (ctx === VALID_CTX[BUC_FIELD_DETAILS]) {
+        collectSummarySections(app, z);
       } else {
         collectTranslations(app, z);
       }
@@ -194,8 +213,13 @@ async function main(argv) {
       if (o.requested.length !== argv.length) {
         console.log(USAGE);
       } else {
+        // zip assets
         await zip(ctx, o.requested.length === 0 ? o.all : o.requested);
+
+        // get credentials
         const tenantInfo = await readTenantInfo();
+
+        // upload
         upload(ASSET_ZIP, tenantInfo);
       }
     }
