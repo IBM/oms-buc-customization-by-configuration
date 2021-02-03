@@ -43,24 +43,6 @@
         "showWhen": "always"
       },
       {
-        "label": "CUSTOM_ORDER.SEARCH.DRAFT_ORDER",
-        "type": "toggle",
-        "target": "orders",
-        "showWhen": "always",
-        "request": "DraftOrderFlag",
-        "list": [
-          {
-            "id": "true",
-            "label": "CUSTOM_LIST.BOOLEAN.Y"
-          },
-          {
-            "id": "false",
-            "label": "CUSTOM_LIST.BOOLEAN.N",
-            "selected": "true"
-          }
-        ]
-      },
-      {
         "showWhen": "always",
         "label": "CUSTOM_ORDER.SEARCH.PAYMENT_TYPE",
         "type": "dropdown",
