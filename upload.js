@@ -6,13 +6,15 @@ const archiver = require('archiver');
 const BUC_TABLE_CONFIG = 'buc-table-config';
 const GET_PAGE_TEMPLATES = 'getPage-templates';
 const BUC_FIELD_DETAILS = 'buc-field-details';
+const BUC_TENANT_CONFIG = 'buc-tenant-config';
 const VALID_CTX = {
   search_fields: 'search_fields',
   translation: 'translation',
   all: 'all',
   [ BUC_TABLE_CONFIG ]: BUC_TABLE_CONFIG,
   [ GET_PAGE_TEMPLATES ]: GET_PAGE_TEMPLATES,
-  [ BUC_FIELD_DETAILS ]: BUC_FIELD_DETAILS
+  [ BUC_FIELD_DETAILS ]: BUC_FIELD_DETAILS,
+  [ BUC_TENANT_CONFIG ]:  BUC_TENANT_CONFIG
 };
 const USAGE = '\n' +
   'usage: yarn upload all [<app-list>]\n' +
@@ -119,6 +121,10 @@ function collectTableConfig(app, z) {
   collectFile(`${app}/${VALID_CTX[BUC_TABLE_CONFIG]}.json`, z);
 }
 
+function collectTenantConfig(app, z) {
+  collectFile(`${app}/${VALID_CTX[BUC_TENANT_CONFIG]}.json`, z);
+}
+
 function collectPageTemplates(app, z) {
   collectFile(`${app}/${VALID_CTX[GET_PAGE_TEMPLATES]}.json`, z);
 }
@@ -148,6 +154,7 @@ function zip(ctx, appList) {
         collectPageTemplates(app, z);
         collectTranslations(app, z);
         collectSummarySections(app, z);
+        collectTenantConfig(app, z);
       } else if (ctx === VALID_CTX.search_fields) {
         collectSearchFields(app, z);
       } else if (ctx === VALID_CTX[BUC_TABLE_CONFIG]) {
@@ -156,6 +163,8 @@ function zip(ctx, appList) {
         collectPageTemplates(app, z);
       } else if (ctx === VALID_CTX[BUC_FIELD_DETAILS]) {
         collectSummarySections(app, z);
+      } else if (ctx === VALID_CTX[BUC_TENANT_CONFIG]) {
+        collectTenantConfig(app, z);
       } else {
         collectTranslations(app, z);
       }

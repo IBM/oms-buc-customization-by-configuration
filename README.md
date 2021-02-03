@@ -3,6 +3,7 @@
   * The Order search and Shipment search pages can be customized via configuration to add extra search fields that are supported by the IBM Sterling Order Management API.
   * Tables that are displayed on the Order and Shipment pages include a predefined set of columns. You can add more columns to show any additional data that is retrievable by the IBM Sterling Order Management API.
   * Order, Shipment, and Inventory details pages include a Summary section that display a predefined set of data fields. You can add more fields to show information that is retrievable by the IBM Sterling Order Management API.
+  * More fields could be added to the Settings/Configurations/Data fields tab in order to allow the tenant to control its visibility.
 * This repository provides:
   * Sample code that you can use as a reference to customize the different areas mentioned in the overview
   * A script to upload the content to your tenant
@@ -25,6 +26,7 @@
   * `search_fields.json` (for information about the attributes in the file, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSGTJF/developing/buc_ootb_syntax.html))
   * `buc-table-config.json` (for information about creating this file and the attributes in the file, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSGTJF/developing/buc_ootbtable_syntax.html))
   * `buc-field-details.json` (for information about creating this file and about the attributes in the file, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSGTJF/developing/buc_ootb_summary.html))
+  * `buc-tenant-config.json` (for information about creating this file and about the attributes in the file, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSGTJF/developing/buc_ootb_config.html))
   * `getPage-templates.json` (for information about using this file to make the Order Hub pages retrieve extra information using custom API output templates, see [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSGTJF/developing/buc_ootbtable_getsyntax.html))
   * translation JSON files (For information about translation file naming convention, click  [here](#translation-file-naming))
 * invoke using: `yarn upload all [ <app1> [ <app2> [ ... ] ] ]`
